@@ -16,10 +16,10 @@ export default function NavBar() {
                                 <Link className="nav-link" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/eventDetails">View</Link>
+                                <Link className="nav-link" to="/eventDetails">Details</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/eventController">Control</Link>
+                                <Link className="nav-link" to="/eventController">Manage</Link>
                             </li>
                         </ul>
                     </div>
