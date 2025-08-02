@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css' // ensure this is imported
 
-export default function Home() {
+export default function Home({ setAlert }) {
 
     // Function to add predefined sample events to localStorage
     function addSampleEventsToLocalStorage() {
@@ -48,7 +48,7 @@ export default function Home() {
             localStorage.setItem(id, JSON.stringify(event));
         });
 
-        alert("Sample events added to localStorage.");
+        setAlert("Sample events added to localStorage.", 'success');
     }
 
     return (
@@ -76,7 +76,10 @@ export default function Home() {
                 </button>
 
                 <button
-                    onClick={() => localStorage.clear()}
+                    onClick={() => {
+                        localStorage.clear();
+                        setAlert("Cleared Local Storage", 'danger');
+                    }}
                     className="btn btn-outline-danger"
                 >
                     <i className="bi bi-trash3 me-2"></i>
