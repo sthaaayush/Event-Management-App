@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Alert(message, type) {
+export default function Alert({message, type}) {
     return (
         <div>
             {

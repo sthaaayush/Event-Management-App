@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 
-export default function EventView() {
+export default function EventView({ setAlert }) {
     // track which date is selected on the calendar
     const [selectedDate, setSelectedDate] = useState(new Date())
 
@@ -40,12 +40,12 @@ export default function EventView() {
         return latestKey
             ? JSON.parse(localStorage.getItem(latestKey))
             : {
-                  title: '',
-                  description: '',
-                  venue: '',
-                  date: '',
-                  organizer: ''
-              }
+                title: '',
+                description: '',
+                venue: '',
+                date: '',
+                organizer: ''
+            }
     })
 
     // array of all event objects loaded from localStorage
@@ -77,8 +77,11 @@ export default function EventView() {
 
     // removes event both from localStorage and the displayed list
     const deleteEvent = (key) => {
-        localStorage.removeItem(key) // delete from storage
-        setEventData((prev) => prev.filter((event) => event.key !== key)) // update UI
+        if (window.confirm("Are you sure")) {
+            localStorage.removeItem(key) // delete from storage
+            setEventData((prev) => prev.filter((event) => event.key !== key)) // update UI
+            setAlert("Event Deleted", 'danger');
+        }
     }
 
     return (

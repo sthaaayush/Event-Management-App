@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function EventController() {
+export default function EventController({setAlert}) {
     // state for the form inputs
     const [formData, setFormData] = useState({
         title: '',
@@ -41,7 +41,7 @@ export default function EventController() {
         } else {
             // save event with current timestamp key
             localStorage.setItem(Date.now(), JSON.stringify(formData))
-
+            setAlert("Event Created", 'success')
             // reset form for convenience
             setFormData({
                 title: '',
