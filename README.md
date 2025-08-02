@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Event Management React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This is a modern, responsive Event Management web application built with React. It allows users to add, view, update, and delete events stored in the browser's localStorage. The app features a clean UI with a calendar for date selection and event highlighting, and an event list for easy browsing. Users can also add sample events for quick testing.
 
-## Available Scripts
+The project demonstrates practical React skills including state management, effects, form handling, conditional rendering, and integration with browser storage. It uses Bootstrap 5 for styling and layout and `react-calendar` for an interactive calendar UI.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Add Events:** Fill out a form to create new events with title, description, venue, date, and optional organizer.
+- **View Events:** Click dates on the calendar or select from the event list to see detailed event info.
+- **Update Events:** Edit event details with real-time validation to prevent date/venue collisions.
+- **Delete Events:** Remove unwanted events with confirmation.
+- **Calendar Highlights:** Dates with events are visually highlighted on the calendar.
+- **Sample Data:** Quickly populate the app with sample events to test functionality.
+- **Responsive Design:** Layout adjusts smoothly for different screen sizes.
+- **Persistent Storage:** Uses localStorage to persist event data across sessions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Installation & Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/sthaaayush/Event-Management-App.git
+   cd Event-Management-App
+  
+2. **Install dependencies** 
+###### *This project depends on:*
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React (create-react-app or similar setup)
+- react-calendar
+- bootstrap-icons
+```bash
+npm install react react-router-dom react-calendar bootstrap bootstrap-icons
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Run the development server**
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Usage Notes
+- Events are saved in localStorage with timestamp keys.
+- The app prevents adding or updating events with the same venue and date to avoid conflicts.
+- Alerts provide feedback on successful or failed actions.
+- The calendar visually marks dates with scheduled events.
+- pdating events opens a form overlay prefilled with existing event data.
+- Bootstrap 5 and bootstrap-icons are used for styling and UI icons, ensuring a consistent modern look.
