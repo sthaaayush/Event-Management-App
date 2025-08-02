@@ -11,7 +11,7 @@ export default function EventView() {
         overflowY: 'scroll',
         scrollbarWidth: 'none',        // hides scrollbar in Firefox
         msOverflowStyle: 'none',        // hides scrollbar in IE 10+
-        height: '50em'
+        height: '43em'
     }
 
     // state to track the event currently being displayed in detail
@@ -74,71 +74,84 @@ export default function EventView() {
     }
 
     return (
-        <div className='d-flex'>
-            <div className='container mx-2 my-2'>
-                {/* Event detail section */}
-                <div className='w-100 border border-black rounded mb-3 d-flex flex-column justify-content-evenly px-4' style={{ height: "20em" }}>
-                    <h2>Event Details</h2>
-                    <p><strong>Title:</strong> {eventDetails.title}</p>
-                    <p><strong>Description:</strong> {eventDetails.description}</p>
-                    <p><strong>Venue:</strong> {eventDetails.venue}</p>
-                    <p><strong>Date:</strong> {eventDetails.date}</p>
-                    <p><strong>Organizer:</strong> {eventDetails.organizer}</p>
-                </div>
-
-                {/* Calendar section */}
-                <div className='h-50 w-100 border border-black rounded mb-5 p-4'>
-                    <Calendar
-                        onChange={setSelectedDate}
-                        value={selectedDate}
-                        onClickDay={(date) => {
-                            const formattedDate = date.toLocaleDateString('en-CA');
-                            const matchedEvent = eventData.find(event => event.date === formattedDate);
-                            if (matchedEvent) {
-                                setEventDetails(matchedEvent);
-                            } else {
-                                setEventDetails({
-                                    title: '',
-                                    description: '',
-                                    venue: '',
-                                    date: formattedDate,
-                                    organizer: ''
-                                });
-                            }
-                        }}
-                        tileClassName={({ date, view }) => {
-                            const formattedDate = date.toLocaleDateString('en-CA');
-                            if (view === 'month' && eventData.some(event => event.date === formattedDate)) {
-                                return 'occupied-date';
-                            }
-                            return null;
-                        }}
-                    />
-
-                </div>
+    <div className='d-flex flex-wrap bg-light' style={{ minHeight: '100vh', padding: '2em' }}>
+        {/* Left Panel: Calendar and Event Details */}
+        <div className='container shadow-sm bg-white rounded p-4 me-4 mb-4' style={{ flex: '1', minWidth: '350px', maxWidth: '600px' }}>
+            {/* Event Details */}
+            <div className='mb-4'>
+                <h4 className='text-primary mb-3 border-bottom pb-2'>📌 Event Details</h4>
+                <p><strong>📝 Title:</strong> {eventDetails.title || <span className="text-muted">N/A</span>}</p>
+                <p><strong>🗒️ Description:</strong> {eventDetails.description || <span className="text-muted">N/A</span>}</p>
+                <p><strong>📍 Venue:</strong> {eventDetails.venue || <span className="text-muted">N/A</span>}</p>
+                <p><strong>📅 Date:</strong> {eventDetails.date || <span className="text-muted">N/A</span>}</p>
+                <p><strong>👤 Organizer:</strong> {eventDetails.organizer || <span className="text-muted">N/A</span>}</p>
             </div>
 
-            {/* List of all events on the right */}
-            <div className='container w-50 d-flex flex-column overflow-y-scroll' style={hideScrollbar}>
-                {
-                    eventData.map((item) => (
-                        <div key={item.key} className='border border-black rounded w-100 my-2 mx-2 d-flex justify-content-between' >
-                            {/* Clickable event summary */}
-                            <ul className='d-flex flex-column justify-content-between' onClick={() => { setEventDetails(item) }} style={{ cursor: 'pointer' }}>
-                                <li>{item.title}</li>
-                                <li>{item.venue}</li>
-                                <li>{item.date}</li>
-                            </ul>
+            {/* Calendar */}
+            <div className='border p-3 rounded'>
+                <h5 className='mb-3'>📆 Select a Date</h5>
+                <Calendar
+                    className="rounded shadow-sm"
+                    onChange={setSelectedDate}
+                    value={selectedDate}
+                    tileClassName={({ date, view }) => {
+                        const formattedDate = date.toLocaleDateString('en-CA');
+                        if (view === 'month' && eventData.some(event => event.date === formattedDate)) {
+                            return 'bg-warning text-white rounded'; // highlight dates with events
+                        }
+                        return null;
+                    }}
+                    onClickDay={(date) => {
+                        const formattedDate = date.toLocaleDateString('en-CA');
+                        const matchedEvent = eventData.find(event => event.date === formattedDate);
+                        if (matchedEvent) {
+                            setEventDetails(matchedEvent);
+                        } else {
+                            setEventDetails({
+                                title: '',
+                                description: '',
+                                venue: '',
+                                date: formattedDate,
+                                organizer: ''
+                            });
+                        }
+                    }}
+                    style={{
+                        width: '100%',
+                        fontSize: '1.1rem',
+                        transform: 'scale(1.05)',
+                        transformOrigin: 'top left'
+                    }}
+                />
+            </div>
+        </div>
 
-                            {/* Action buttons for each event */}
-                            <div className='d-flex flex-column w-25'>
-                                <button className='btn btn-info my-2 mx-2' onClick={() => { console.log("Update") }}>Update</button>
-                                <button className='btn btn-danger my-2 mx-2' onClick={() => { deleteEvent(item.key) }}>Delete</button>
+        {/* Right Panel: Event List */}
+        <div className='container shadow-sm bg-white rounded p-4' style={{ flex: '1', minWidth: '350px', maxHeight: '90vh', overflowY: 'auto' }}>
+            <h4 className='text-success mb-3 border-bottom pb-2'>📚 All Events</h4>
+            {
+                eventData.length === 0 ? (
+                    <p className='text-muted'>No events available.</p>
+                ) : (
+                    eventData.map((item) => (
+                        <div key={item.key} className='card mb-3 shadow-sm'>
+                            <div className='card-body d-flex justify-content-between align-items-start'>
+                                <div className='me-3' style={{ cursor: 'pointer' }} onClick={() => setEventDetails(item)}>
+                                    <h5 className='card-title'>{item.title}</h5>
+                                    <p className='card-text mb-1'><small>📍 {item.venue}</small></p>
+                                    <p className='card-text'><small>📅 {item.date}</small></p>
+                                </div>
+                                <div className='d-flex flex-column'>
+                                    <button className='btn btn-outline-info btn-sm mb-2' onClick={() => console.log("Update")}>✏️ Update</button>
+                                    <button className='btn btn-outline-danger btn-sm' onClick={() => deleteEvent(item.key)}>🗑️ Delete</button>
+                                </div>
                             </div>
                         </div>
                     ))
-                }
-            </div>
+                )
+            }
         </div>
-    )
+    </div>
+)
+
 }

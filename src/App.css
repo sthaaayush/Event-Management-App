@@ -7,3 +7,27 @@
 .react-calendar{
   width: 45em;
 }
+
+.react-calendar {
+  border: none !important;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.react-calendar__tile--active {
+  background: #0d6efd !important;
+  color: white !important;
+  border-radius: 10px;
+}
+
+.react-calendar__tile--now {
+  background: #198754 !important;
+  color: white !important;
+  border-radius: 10px;
+}
+
+.occupied-date {
+  background-color: #ffc107 !important;
+  color: black !important;
+  border-radius: 10px;
+}
