@@ -57,7 +57,7 @@ export default function EventController() {
         <div className="d-flex justify-content-center align-items-center vh-100 bg-light my-5">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-lg rounded p-5 h-110"
+                className="bg-white shadow-lg rounded p-5 h-10"
                 style={{ width: '40em', maxWidth: '100vw' }}
             >
                 <h3 className="mb-4 text-primary border-bottom pb-2 text-center">
