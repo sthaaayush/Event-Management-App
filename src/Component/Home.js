@@ -61,7 +61,7 @@ export default function Home({ setAlert }) {
                     Welcome to the Event Management Panel
                 </h2>
                 <p className="lead">
-                    This platform helps you organize, manage, and track various academic and extracurricular events with ease. Whether it’s a hackathon, workshop, or seminar — plan everything seamlessly in one place.
+                    This platform helps you organize, manage, and track various academic and extracurricular events with ease. Whether it’s a hackathons, workshop, or seminar — plan everything seamlessly in one place.
                 </p>
             </div>
 
