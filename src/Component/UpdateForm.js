@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function UpdateComponent({ eventToEdit, onClose, onUpdate }) {
+export default function UpdateComponent({ eventToEdit, onClose, onUpdate, onAlert }) {
     const [formData, setFormData] = useState({ //initial data frame
         title: '',
         description: '',
@@ -32,13 +32,34 @@ export default function UpdateComponent({ eventToEdit, onClose, onUpdate }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Save updated data to localStorage using the existing event key
-        if (eventToEdit && eventToEdit.key) {
+        // Check for duplicates except the current event being updated
+        let isDuplicate = false;
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (/^\d{13}$/.test(key)) {
+                if (key === eventToEdit.key) continue; // skip the event being updated
+                const existingEventData = JSON.parse(localStorage.getItem(key));
+                if (
+                    formData.venue === existingEventData.venue &&
+                    formData.date === existingEventData.date
+                ) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+        }
+
+        if (isDuplicate) {
+            onAlert("Oops! This event collides with an existing one.", "danger");
+        } else {
+            // Save updated event to localStorage
             localStorage.setItem(eventToEdit.key, JSON.stringify(formData));
-            onUpdate(formData, eventToEdit.key); // inform parent of update
-            onClose(); // close the update form
+            onUpdate(formData, eventToEdit.key);
+            onClose();
+            onAlert("Event updated successfully", "success");
         }
     };
+
 
     return (
         <div

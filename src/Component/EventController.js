@@ -37,7 +37,7 @@ export default function EventController({setAlert}) {
         }
 
         if (isDuplicate) {
-            alert('Oops! This event collides with an existing one.')
+            setAlert('Oops! This event collides with an existing one.', 'danger');
         } else {
             // save event with current timestamp key
             localStorage.setItem(Date.now(), JSON.stringify(formData))

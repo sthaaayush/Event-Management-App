@@ -110,6 +110,7 @@ export default function EventView({ setAlert }) {
                     eventToEdit={editingEvent}
                     onClose={closeUpdateForm}
                     onUpdate={handleUpdateEvent}
+                    onAlert={setAlert}
                 />
             )}
 
