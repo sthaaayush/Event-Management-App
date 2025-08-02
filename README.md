@@ -35,7 +35,9 @@ The project demonstrates practical React skills including state management, effe
 - react-calendar
 - bootstrap-icons
 ```bash
-npm install react react-router-dom react-calendar bootstrap bootstrap-icons
+npm i react 
+npm i react-router-dom react-calendar 
+npm i bootstrap bootstrap-icons
 ```
 
 3. **Run the development server**
