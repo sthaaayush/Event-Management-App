@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
+import UpdateForm from './UpdateForm'
+import UpdateComponent from './UpdateForm'
 
 export default function EventView({ setAlert }) {
     // track which date is selected on the calendar
     const [selectedDate, setSelectedDate] = useState(new Date())
 
     // custom styles to hide scrollbar but still allow scrolling on event list panel
-    // had to keep some inline styles because Bootstrap doesn’t cover these exactly
     const hideScrollbar = {
-        overflowY: 'scroll',        // enable vertical scrolling
-        scrollbarWidth: 'none',     // hide scrollbar in Firefox
-        msOverflowStyle: 'none',    // hide scrollbar in IE 10+
-        flex: '1',                  // flex-grow so it fills remaining space nicely
-        minWidth: '350px',          // prevent panel from getting too narrow
-        maxHeight: '113vh',         // limit max height with viewport consideration
-        height: '43em'              // fixed height for scrolling area
+        overflowY: 'scroll',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        flex: '1',
+        minWidth: '350px',
+        maxHeight: '113vh',
+        height: '43em'
     }
 
     // holds details of the currently displayed event
@@ -84,9 +85,35 @@ export default function EventView({ setAlert }) {
         }
     }
 
+    const [editingEvent, setEditingEvent] = useState(null); //To display when clicked
+
+    const openUpdateForm = (event) => { //Open Update Form
+        setEditingEvent(event);
+    };
+
+    const closeUpdateForm = () => {//Close Update Form
+        setEditingEvent(null);
+    };
+
+    //Update value from update form
+    const handleUpdateEvent = (updatedData, key) => {
+        setEventData(prev =>
+            prev.map(ev => (ev.key === key ? { ...updatedData, key } : ev))
+        );
+        setEventDetails(prev => (prev.key === key ? { ...updatedData, key } : prev));
+    };
+
+
     return (
-        // main container with light background and padding
         <div className="d-flex flex-wrap bg-light min-vh-100 p-4">
+            {editingEvent && (
+                <UpdateComponent
+                    eventToEdit={editingEvent}
+                    onClose={closeUpdateForm}
+                    onUpdate={handleUpdateEvent}
+                />
+            )}
+
             {/* Left panel: event details and calendar */}
             <div
                 className="container shadow-sm bg-white rounded p-4 me-4 mb-4 flex-grow-1"
@@ -188,7 +215,7 @@ export default function EventView({ setAlert }) {
                                 <div className="d-flex flex-column">
                                     <button
                                         className="btn btn-outline-info btn-sm mb-2"
-                                        onClick={() => console.log('Update')}
+                                        onClick={() => openUpdateForm(item)}
                                     >
                                         ✏️ Update
                                     </button>
