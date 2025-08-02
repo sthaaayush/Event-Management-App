@@ -79,19 +79,19 @@ export default function EventView() {
         <div className='container shadow-sm bg-white rounded p-4 me-4 mb-4' style={{ flex: '1', minWidth: '350px', maxWidth: '600px' }}>
             {/* Event Details */}
             <div className='mb-4'>
-                <h4 className='text-primary mb-3 border-bottom pb-2'>📌 Event Details</h4>
-                <p><strong>📝 Title:</strong> {eventDetails.title || <span className="text-muted">N/A</span>}</p>
-                <p><strong>🗒️ Description:</strong> {eventDetails.description || <span className="text-muted">N/A</span>}</p>
-                <p><strong>📍 Venue:</strong> {eventDetails.venue || <span className="text-muted">N/A</span>}</p>
-                <p><strong>📅 Date:</strong> {eventDetails.date || <span className="text-muted">N/A</span>}</p>
-                <p><strong>👤 Organizer:</strong> {eventDetails.organizer || <span className="text-muted">N/A</span>}</p>
+                <h4 className='text-primary mb-3 border-bottom pb-2'>Event Details</h4>
+                <p><strong>Title:</strong> {eventDetails.title || <span className="text-muted">N/A</span>}</p>
+                <p><strong>Description:</strong> {eventDetails.description || <span className="text-muted">N/A</span>}</p>
+                <p><strong> Venue:</strong> {eventDetails.venue || <span className="text-muted">N/A</span>}</p>
+                <p><strong> Date:</strong> {eventDetails.date || <span className="text-muted">N/A</span>}</p>
+                <p><strong>Organizer:</strong> {eventDetails.organizer || <span className="text-muted">N/A</span>}</p>
             </div>
-
+            <hr />
             {/* Calendar */}
             <div className='border p-3 rounded'>
                 <h5 className='mb-3'>📆 Select a Date</h5>
                 <Calendar
-                    className="rounded shadow-sm"
+                    className="w-100 h-100 d-flex flex-column justify-content-evenly rounded shadow-sm"
                     onChange={setSelectedDate}
                     value={selectedDate}
                     tileClassName={({ date, view }) => {
@@ -127,8 +127,8 @@ export default function EventView() {
         </div>
 
         {/* Right Panel: Event List */}
-        <div className='container shadow-sm bg-white rounded p-4' style={{ flex: '1', minWidth: '350px', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h4 className='text-success mb-3 border-bottom pb-2'>📚 All Events</h4>
+        <div className='container shadow-sm bg-white rounded p-4' style={{ flex: '1', minWidth: '350px', maxHeight: '113vh', overflowY: 'auto' }}>
+            <h4 className='text-success mb-3 border-bottom pb-2'>All Events</h4>
             {
                 eventData.length === 0 ? (
                     <p className='text-muted'>No events available.</p>
@@ -138,8 +138,8 @@ export default function EventView() {
                             <div className='card-body d-flex justify-content-between align-items-start'>
                                 <div className='me-3' style={{ cursor: 'pointer' }} onClick={() => setEventDetails(item)}>
                                     <h5 className='card-title'>{item.title}</h5>
-                                    <p className='card-text mb-1'><small>📍 {item.venue}</small></p>
-                                    <p className='card-text'><small>📅 {item.date}</small></p>
+                                    <p className='card-text mb-1'><small> {item.venue}</small></p>
+                                    <p className='card-text'><small> {item.date}</small></p>
                                 </div>
                                 <div className='d-flex flex-column'>
                                     <button className='btn btn-outline-info btn-sm mb-2' onClick={() => console.log("Update")}>✏️ Update</button>
