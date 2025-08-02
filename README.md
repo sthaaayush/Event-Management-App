@@ -52,3 +52,17 @@ npm start
 - The calendar visually marks dates with scheduled events.
 - pdating events opens a form overlay prefilled with existing event data.
 - Bootstrap 5 and bootstrap-icons are used for styling and UI icons, ensuring a consistent modern look.
+
+### Project Package Structure
+```bash
+/src
+  /components
+    EventView.js         # Main view with calendar and event details
+    EventController.js   # Form component to add new events
+    UpdateComponent.js   # Modal-like component for updating events
+    Alert.js             # Alert component for feedback messages
+    NavBar.js            # Navigation bar component
+    Home.js              # Home page with sample event controls and intro
+  App.js                 # Root app component managing routing and alerts
+  index.js               # React entry point
+  ```
